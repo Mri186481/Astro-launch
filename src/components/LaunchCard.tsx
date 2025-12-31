@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import type { Launch } from '../types'; 
 import defaultPlaceholder from '../assets/placeholder-rocket.png';
 
@@ -10,7 +11,7 @@ export default function LaunchCard({ launch }: Props) {
   // Si existe la imagen del parche lo uso. Si es null o undefined, uso el placeholder que he puesto en assets
   const imageUrl = launch.links.patch.small || defaultPlaceholder;
   return (
-
+    <Link to={`/launch/${launch.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
       <article className="launch-card">
         <div className="card-header">
           <img 
@@ -23,6 +24,6 @@ export default function LaunchCard({ launch }: Props) {
           <p>{new Date(launch.date_utc).getFullYear()}</p>
         </div>
       </article>
-    
+    </Link>
   );
 }
