@@ -4,12 +4,16 @@ import { API_ENDPOINTS } from "../services/SpaceXAPI";
 import LaunchCard from "./LaunchCard";
 import LoadingSpinner from "./LoadingSpinner";
 import ErrorMessage from "./ErrorMessage";
+import SearchControls from "./SearchControls";
 
 
 export default function LaunchList() {
   const [launches, setLaunches] = useState<Launch[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  //Añado dos estados mas para busqueda y ordenacion
+  const [searchTerm, setSearchTerm] = useState("");
+  const [sortOrder, setSortOrder] = useState("asc");
   
 
 
@@ -42,12 +46,61 @@ export default function LaunchList() {
   // Si hay error..
   if (error) return <ErrorMessage message={error} />;
 
+    //Procesamiento de datos
+
+  // 1. Empiezo con todos los datos
+  let resultado = launches;
+  //filter modifica el array resultado despues de haberlo recorrido elemento a elemento
+  // 2. Filtramos por nombre
+  resultado = resultado.filter(lanzamiento => {
+    //convierto el nombre del cohete como lo que el usuario ha escrito a minusculas
+    const nombreEnMinusculas = lanzamiento.name.toLowerCase();
+    const busquedaEnMinusculas = searchTerm.toLowerCase();
+    //includes pregunta si una cadena de texto esta dentro de otra
+    return nombreEnMinusculas.includes(busquedaEnMinusculas);
+    //el return si devuelve true: el lanzamiento se guarada en la nueva lista si false se decarta
+  });
+
+// 3. Ordeno el resultado del filtro
+  resultado.sort((a, b) => {
+    //convierto la fecha a numero, los milisegundos que han pasado desde el año 1970
+    const tiempoA = new Date(a.date_utc).getTime();
+    const tiempoB = new Date(b.date_utc).getTime();
+
+    if (sortOrder === "asc") {
+      return tiempoA - tiempoB; // El numero mas pequeño(fechas mas vieja) va primero
+    } else {
+      return tiempoB - tiempoA; // El numero mas grande(fecha mas reciente) va primero
+    }
+  });
+
+// 4. Guardo el resultado final
+const filteredLaunches = resultado;
+
+
   
   return (
+    <section>
+      {/* Componente de búsqueda pasamos estados de busqueda y ordenacion */}
+      <SearchControls 
+        searchTerm={searchTerm}
+        onSearchChange={setSearchTerm}
+        sortOrder={sortOrder}
+        onSortChange={setSortOrder}
+      />
+      {/* map por cada mision que encuentra(launch) ejecuta el componente */}
       <div className="launch-list-grid">
-        {launches.map((launch) => (
+        {filteredLaunches.map((launch) => (
           <LaunchCard key={launch.id} launch={launch} />
         ))}
       </div>
+
+      {/* Feedback visual si no hay resultados */}
+      {filteredLaunches.length === 0 && (
+        <p style={{ textAlign: "center", padding: "2rem", color: "var(--text-secondary)" }}>
+          No hay misiones que coincidan con tu búsqueda.
+        </p>
+      )}
+    </section>
   );
 };
