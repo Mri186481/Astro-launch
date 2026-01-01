@@ -1,25 +1,19 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import ThemeToggle from "../ThemeToggle";
 
-const Header: React.FC = () => {
+export default function Header() {
   return (
     <header className="main-header">
-      {/* Logo / Título */}
-      <h1 style={{ margin: 0, fontSize: '1.5rem' }}>
-        AstroLaunch 🚀
-      </h1>
-
-      {/* Navegación */}
-      <nav>
-        <NavLink 
-          to="/"
-          className={({ isActive }) => isActive ? 'active' : ''}
-        >
-          Inicio
-        </NavLink>
+      <Link to="/" className="logo-link">
+        <h1>AstroLaunch 🚀</h1>
+      </Link>
+  
+      <nav className="main-nav">
+        <Link to="/">Inicio</Link>
+        {/* Aquí se pueden ir añadiendo mas links */}
+        
+        <ThemeToggle />
       </nav>
     </header>
   );
-};
-
-export default Header;
+}
