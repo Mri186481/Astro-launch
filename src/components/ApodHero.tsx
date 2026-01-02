@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import type { HeroImageData } from '../types'; // Importamos el tipo de imagen
 import LoadingSpinner from './LoadingSpinner';
+import { API_ENDPOINTS } from '../services/SpaceXAPI';
 //APOD
 //Acronimo de Astronomy Picture of the Day
 //HERO(primer bloque visual o image principal)
@@ -12,7 +13,7 @@ const ApodHero: React.FC = () => {
   useEffect(() => {
     const fetchSimpleImage = async () => {
       try {
-        const response = await fetch('https://images-api.nasa.gov/search?q=rocket%20launch&media_type=image');
+        const response = await fetch(API_ENDPOINTS.NASA_IMAGES);
         const data = await response.json();
         const items = data.collection.items;
         

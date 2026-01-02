@@ -5,6 +5,7 @@ import type { Launch, Rocket, Launchpad } from '../types';
 import { API_ENDPOINTS } from '../services/SpaceXAPI'; 
 import LoadingSpinner from '../components/LoadingSpinner';
 import ErrorMessage from '../components/ErrorMessage';
+import LaunchMap from '../components/LaunchMap';
 
 export default function LaunchDetailPage() {
   const { id } = useParams<{ id: string }>();
@@ -106,6 +107,13 @@ export default function LaunchDetailPage() {
             <p><strong>Localidad:</strong> {launchpad.locality} ({launchpad.region})</p>
             <p><strong>Coordenadas:</strong> {launchpad.latitude}, {launchpad.longitude}</p>
           </div>
+
+          {/* INTEGRACIÓN DEL MAPA (Servicio Externo) */}
+          <LaunchMap 
+            latitude={launchpad.latitude} 
+            longitude={launchpad.longitude} 
+            locationName={launchpad.full_name} 
+          />
           
           <div className="info-meta">
             <p><strong>Fecha:</strong> {new Date(launch.date_utc).toLocaleDateString()}</p>
