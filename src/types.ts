@@ -7,6 +7,7 @@ export interface Launch {
   details: string | null;
   rocket: string;
   launchpad: string | null;
+  success: boolean | null;
 }
 
 export interface Links {

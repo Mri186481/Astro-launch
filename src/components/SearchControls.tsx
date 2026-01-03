@@ -3,6 +3,9 @@ type Props = {
   onSearchChange: (value: string) => void;
   sortOrder: string;
   onSortChange: (value: string) => void;
+  //Añado nuevas PROPS para implemntar filtro por estado de la mision(exito o fallo)
+  filterStatus: string;
+  onFilterChange: (value: string) => void;
 };
 
 export default function SearchControls({
@@ -10,6 +13,8 @@ export default function SearchControls({
   onSearchChange,
   sortOrder,
   onSortChange,
+  filterStatus,
+  onFilterChange,
 }: Props) {
   return (
     <div className="search-controls-container">
@@ -21,7 +26,16 @@ export default function SearchControls({
         onChange={(e) => onSearchChange(e.target.value)}
         className="search-input"
       />
-
+      {/* Selector de Filtro por Estado */}
+      <select
+        value={filterStatus}
+        onChange={(e) => onFilterChange(e.target.value)}
+        className="sort-select"
+      >
+        <option value="all">Todos los estados</option>
+        <option value="success">✅ Solo Éxitos</option>
+        <option value="failure">❌ Solo Fallos</option>
+      </select>
       {/* Selector de ordenación */}
       <select
         value={sortOrder}

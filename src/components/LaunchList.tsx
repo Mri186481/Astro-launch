@@ -14,6 +14,8 @@ export default function LaunchList() {
   //Añado dos estados mas para busqueda y ordenacion
   const [searchTerm, setSearchTerm] = useState("");
   const [sortOrder, setSortOrder] = useState("asc");
+  //Añado otro estado: "all", "success" o "failure"
+  const [filterStatus, setFilterStatus] = useState("all");
   
 
 
@@ -51,14 +53,25 @@ export default function LaunchList() {
   // 1. Empiezo con todos los datos
   let resultado = launches;
   //filter modifica el array resultado despues de haberlo recorrido elemento a elemento
-  // 2. Filtramos por nombre
+  // 2. Filtrado combinado por nombre y Estado
   resultado = resultado.filter(lanzamiento => {
     //convierto el nombre del cohete como lo que el usuario ha escrito a minusculas
     const nombreEnMinusculas = lanzamiento.name.toLowerCase();
     const busquedaEnMinusculas = searchTerm.toLowerCase();
     //includes pregunta si una cadena de texto esta dentro de otra
-    return nombreEnMinusculas.includes(busquedaEnMinusculas);
+    const coincideNombre = nombreEnMinusculas.includes(busquedaEnMinusculas);
+    
+    //Lógica de Estado, si es success, failure o por defecto all
+    let coincideEstado = true;
+    if (filterStatus === "success") {
+      coincideEstado = lanzamiento.success === true;
+    } else if (filterStatus === "failure") {
+      coincideEstado = lanzamiento.success === false;
+    }
+    //El lanzamiento debe cumplir AMBAS condiciones
     //el return si devuelve true: el lanzamiento se guarada en la nueva lista si false se decarta
+    return coincideNombre && coincideEstado;
+    
   });
 
 // 3. Ordeno el resultado del filtro
@@ -87,7 +100,15 @@ const filteredLaunches = resultado;
         onSearchChange={setSearchTerm}
         sortOrder={sortOrder}
         onSortChange={setSortOrder}
+        filterStatus={filterStatus}      
+        onFilterChange={setFilterStatus} 
       />
+      {/* Feedback: Se muestra el contador si hay resultados */}
+      {filteredLaunches.length > 0 && (
+        <p className="results-counter">
+          Se han encontrado <strong>{filteredLaunches.length}</strong> lanzamientos:
+        </p>
+      )}
       {/* map por cada mision que encuentra(launch) ejecuta el componente */}
       <div className="launch-list-grid">
         {filteredLaunches.map((launch) => (
@@ -95,11 +116,12 @@ const filteredLaunches = resultado;
         ))}
       </div>
 
-      {/* Feedback visual si no hay resultados */}
+      {/* Feedback si no hay resultados */}
       {filteredLaunches.length === 0 && (
-        <p style={{ textAlign: "center", padding: "2rem", color: "var(--text-secondary)" }}>
-          No hay misiones que coincidan con tu búsqueda.
-        </p>
+        <div className="no-results-box">
+          <h3>🔭 No se encontraron misiones</h3>
+          <p>Prueba a cambiar los filtros de búsqueda.</p>
+        </div>
       )}
     </section>
   );
