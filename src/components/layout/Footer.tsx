@@ -9,11 +9,11 @@ const Footer: React.FC = () => {
       <div className="page-container">
         <div className="footer-content">
           <p>
-            © {currentYear} <strong>AstroLaunch 🚀</strong> - Grado Superior Desarrollo Multiplataforma. Diseño de
+            © {currentYear} <strong>AstroLaunchX 🚀</strong> - Grado Superior Desarrollo Multiplataforma. Diseño de
         Interfaces..
           </p>
           <p className="footer-tagline">
-            Datos proporcionados por las APIs de SpaceX y la NASA.
+            Datos proporcionados por la API de SpaceX.
           </p>
         </div>
       </div>

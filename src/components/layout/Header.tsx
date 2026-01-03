@@ -5,7 +5,7 @@ export default function Header() {
   return (
     <header className="main-header">
       <Link to="/" className="logo-link">
-        <h1>AstroLaunch 🚀</h1>
+        <h1>AstroLaunchX 🚀</h1>
       </Link>
   
       <nav className="main-nav">

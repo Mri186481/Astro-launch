@@ -1,8 +1,6 @@
 const BASE_URL = 'https://api.spacexdata.com/v4';
 
 export const API_ENDPOINTS = {
-  //API de imágenes de la NASA, paara ApodHero
-  NASA_IMAGES: "https://images-api.nasa.gov/search?q=rocket%20launch&media_type=image",
   LAUNCHES: `${BASE_URL}/launches`,
   //Para saber el nombre real del cohete, tipo y descripcion buscamos un nuevo endPoint
   ROCKETS: "https://api.spacexdata.com/v4/rockets",

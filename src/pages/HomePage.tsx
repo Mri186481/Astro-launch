@@ -1,5 +1,5 @@
 import React from 'react';
-import ApodHero from '../components/ApodHero';
+import ApodHero from '../components/layout/LaunchHero';
 import LaunchList from '../components/LaunchList';
 
 const HomePage: React.FC = () => {
