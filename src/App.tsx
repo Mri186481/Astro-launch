@@ -3,6 +3,7 @@ import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import HomePage from './pages/HomePage';
 import LaunchDetailPage from './pages/LaunchDetailPage.tsx';
+import ContactPage from './pages/ContactPage.tsx';  
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/launch/:id" element={<LaunchDetailPage />} />
+        <Route path="/contact" element={<ContactPage />} />
         
       </Routes>
       <Footer />

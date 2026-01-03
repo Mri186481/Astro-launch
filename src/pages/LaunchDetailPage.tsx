@@ -6,6 +6,7 @@ import { API_ENDPOINTS } from '../services/SpaceXAPI';
 import LoadingSpinner from '../components/LoadingSpinner';
 import ErrorMessage from '../components/ErrorMessage';
 import LaunchMap from '../components/LaunchMap';
+import placeholderImg from '../assets/placeholder-rocket.png';
 
 export default function LaunchDetailPage() {
   const { id } = useParams<{ id: string }>();
@@ -81,7 +82,7 @@ export default function LaunchDetailPage() {
       
       <div className="detail-grid">
         <div className="detail-image-container">
-          <img src={launch.links.patch.large || ''} alt={launch.name} />
+          <img src={launch.links.patch.large || placeholderImg} alt={launch.name} />
         </div>
 
         <div className="detail-info">
