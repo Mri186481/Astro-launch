@@ -1,73 +1,29 @@
-# React + TypeScript + Vite
+# AstroLaunchX 🚀
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+AstroLaunchX es una aplicación web interactiva desarrollada con **React** y **TypeScript** para el seguimiento de misiones espaciales de SpaceX. El proyecto integra datos reales mediante APIs, ofreciendo una experiencia de usuario fluida, moderna y adaptativa.
 
-Currently, two official plugins are available:
+## 🛠️ Tecnologías Utilizadas
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+* **Core:** React (Vite), TypeScript.
+* **Estilos:** CSS3 con variables nativas (CSS Variables) para gestión de temas.
+* **Navegación:** React Router DOM.
+* **Gestión de Estado y Lógica:** React Hooks nativos (useState, useEffect) y hooks de librerías (useForm, useParams).
+* **Datos:** SpaceX API v4.
 
-## React Compiler
+## ✨ Funcionalidades Principales
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+1.  **Listado de Misiones:** Visualización en grid de lanzamientos pasados y futuros.
+2.  **Búsqueda y Filtrado:**
+    * Búsqueda en tiempo real por nombre.
+    * Filtrado por estado de la misión (Éxito/Fallo).
+    * Ordenación cronológica (Ascendente/Descendente).
+3.  **Vista de Detalle:** Información técnica del cohete, carga útil y mapa de la plataforma de lanzamiento.
+4.  **Modo Oscuro/Claro:** Cambio de tema persistente y fluido.
+5.  **Formulario de Contacto:** Validación robusta (Regex) y simulación de envío con feedback visual.
+6.  **Diseño UX/UI:** Aplicación de leyes de la Gestalt (Proximidad, Semejanza, Feedback) y diseño totalmente responsive.
 
-## Expanding the ESLint configuration
+## 📦 Instalación y Despliegue
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+1.  Clonar el repositorio.
+2.  Instalar dependencias: `npm install`
+3.  Ejecutar en desarrollo: `npm run dev`
